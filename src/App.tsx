@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
 
-function App() {
+import InputField from './component/InputField';
+import ListTodo from './component/ListTodo';
+import "./style.scss";
+
+export interface TodoType {
+  todo: {
+    name: string;
+  }[]
+}
+
+export default function App() {
+  const [todoList, setTodoList] = useState<TodoType["todo"]>([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h3>SIMPLE TODO LIST</h3>
+      <InputField todoList={todoList} setTodoList={setTodoList} />
+      <ListTodo todoList={todoList} setTodoList={setTodoList} />
     </div>
   );
 }
-
-export default App;
