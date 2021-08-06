@@ -1,8 +1,9 @@
-import { useState } from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
 import InputField from './component/InputField';
 import ListTodo from './component/ListTodo';
+import { State } from './redux/reducers';
 import "./style.scss";
+
 
 export interface TodoType {
   todo: {
@@ -11,13 +12,19 @@ export interface TodoType {
 }
 
 export default function App() {
-  const [todoList, setTodoList] = useState<TodoType["todo"]>([]);
+  const list = useSelector((todoList: State) => todoList.todo.todoList);
 
   return (
     <div className="container">
       <h3>SIMPLE TODO LIST</h3>
-      <InputField todoList={todoList} setTodoList={setTodoList} />
-      <ListTodo todoList={todoList} setTodoList={setTodoList} />
+      <InputField 
+        todoList={list} 
+        // setTodoList={handleAddTodo} 
+      />
+      <ListTodo 
+        todoList={list} 
+        // setTodoList={setTodoList} 
+      />
     </div>
   );
 }
